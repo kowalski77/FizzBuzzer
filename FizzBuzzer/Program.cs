@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using FizzBuzzer.Handlers;
 
 namespace FizzBuzzer
@@ -20,15 +22,18 @@ namespace FizzBuzzer
             };
 
             var fizzBuzzService = new FizzBuzzService(handler);
-            var resultCollection = fizzBuzzService.Run(range);
 
-            foreach (var result in resultCollection)
+            var sw = new Stopwatch();
+            sw.Start();
+
+            var resultCollection = fizzBuzzService.Run(range).ToList();
+            foreach (var result in resultCollection.Where(result => result.Match))
             {
-                if (result.Match)
-                {
-                    Console.WriteLine($"Number: {result.Number} {result.Value}");
-                }
+                Console.WriteLine($"Number: {result.Number} {result.Value}");
             }
+
+            sw.Stop();
+            Console.WriteLine("Elapsed milliseconds " + sw.ElapsedMilliseconds);
         }
     }
 }
