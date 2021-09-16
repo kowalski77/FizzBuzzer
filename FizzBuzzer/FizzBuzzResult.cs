@@ -1,4 +1,4 @@
-﻿namespace FizzBuzzer.Handlers
+﻿namespace FizzBuzzer
 {
     public class FizzBuzzResult
     {
